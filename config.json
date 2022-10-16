@@ -1,0 +1,10 @@
+{
+        "vods":"vods.csv",
+        "background_path":"NUT Background.png",
+        "logo_path":"NuUltRed.png",
+        "rect_color":"#000000",
+        "tri_color":"#ff0000",
+        "render":"mural",
+        "font":"Oswald-Bold.ttf",
+        "font_size":60
+}
