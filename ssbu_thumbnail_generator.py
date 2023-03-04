@@ -7,15 +7,6 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageOps
 # Read config json
 with open("config.json") as load_config:
     config = json.load(load_config)
-BACKGROUND_PATH = config['vods']
-LOGO_PATH = config['logo_path']
-COLOR_RECTANGLE = config['rect_color']
-COLOR_TRIANGLE = config['tri_color']
-font = ImageFont.truetype(config['font'], config['font_size'])
-
-# Read config json
-with open("config.json") as load_config:
-    config = json.load(load_config)
 BACKGROUND_PATH = config["vods"]
 LOGO_PATH = config['logo_path']
 COLOR_RECTANGLE = config['rect_color']
