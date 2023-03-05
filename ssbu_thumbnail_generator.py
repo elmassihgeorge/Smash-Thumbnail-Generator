@@ -4,10 +4,13 @@ import csv
 import json
 from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageOps
 
+def format_character(str):
+    return str.replace('.', '').replace('-','').replace('&', "and").lower()
+
 # Read config json
 with open("config.json") as load_config:
     config = json.load(load_config)
-BACKGROUND_PATH = config["vods"]
+BACKGROUND_PATH = config["background_path"]
 LOGO_PATH = config['logo_path']
 COLOR_RECTANGLE = config['rect_color']
 COLOR_TRIANGLE = config['tri_color']
