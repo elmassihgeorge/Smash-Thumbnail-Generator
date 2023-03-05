@@ -93,17 +93,11 @@ for num in range(len(tournament)):
     text_layer = Image.new('L', (1280, 720))
     draw = ImageDraw.Draw(text_layer)
     
-    p1_width = font.getsize(player_1_name[num].upper())[0]
-    draw.text(((320 - (p1_width / 2)), -13), player_1_name[num].upper(), font=font, fill=255)
-
-    p2_width = font.getsize(player_2_name[num].upper())[0]
-    draw.text(((960 - (p2_width / 2)), 13), player_2_name[num].upper(), font=font, fill=255)
-    
-    bracket_round_width = font.getsize(bracket_round[num].upper())[0]
-    draw.text(((320 - (bracket_round_width / 2)), 600), bracket_round[num].upper(), font=font, fill=255)
-    
-    event_width = font.getsize(event[num].upper())[0]
-    draw.text(((960 - (event_width / 2)), 630), event[num].upper(), font=font, fill=255)
+    # Each point is calculated to be in the center of its box after the rotation
+    draw.text((333, 39), player_1_name[num].upper(), font=font, fill=255, anchor='mm')
+    draw.text((973, 66), player_2_name[num].upper(), font=font, fill=255, anchor='mm')
+    draw.text((307, 652), bracket_round[num].upper(), font=font, fill=255, anchor='mm')
+    draw.text((947, 679), event[num].upper(), font=font, fill=255, anchor='mm')
     
     # Rotate text
     rotated_text_layer = text_layer.rotate(2.41573322)
