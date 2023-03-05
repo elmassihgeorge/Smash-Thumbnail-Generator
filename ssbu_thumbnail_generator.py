@@ -10,6 +10,7 @@ def format_character(str):
 # Read config json
 with open("config.json") as load_config:
     config = json.load(load_config)
+VODS = config["vods"]
 BACKGROUND_PATH = config["background_path"]
 LOGO_PATH = config['logo_path']
 COLOR_RECTANGLE = config['rect_color']
@@ -24,7 +25,7 @@ font = ImageFont.truetype(config['font'], config['font_size'])
     # Note: Insert first character in graphic, rest in title
 # Event Round (Ex. Winner's Final)
 # Event (Ex. Ultimate Singles)
-with open('vods.csv', newline='') as csv_file:
+with open(VODS, newline='') as csv_file:
     csv_reader = csv.reader(csv_file)
     next(csv_reader) #Skip first line
     data = list(csv_reader)
