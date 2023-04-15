@@ -9,6 +9,7 @@ with open("config.json") as load_config:
     config = json.load(load_config)
 BACKGROUND_PATH = config['vods']
 LOGO_PATH = config['logo_path']
+LOGO_SIZE = config['logo_size']
 COLOR_RECTANGLE = config['rect_color']
 COLOR_TRIANGLE = config['tri_color']
 font = ImageFont.truetype(config['font'], config['font_size'])
@@ -57,7 +58,7 @@ with open('vods.csv', newline='') as csv_file:
 
 for num in range(len(tournament)):
     background = Image.open(BACKGROUND_PATH).resize((1280, 720))
-    logo = Image.open(LOGO_PATH).resize((200, 200))
+    logo = Image.open(LOGO_PATH).resize(LOGO_SIZE)
     
     # Read character murals
     character_1 = Image.open(r"P1_Murals/{}.png".format(format_character(player_1_character[num].split(',')[0])))
@@ -116,7 +117,7 @@ for num in range(len(tournament)):
     # background = background.filter(ImageFilter.SMOOTH)
     
     # Add Logo
-    background.paste(logo, (540, 260), logo)
+    background.paste(logo, (640 - LOGO_SIZE[0]//2, 360 - LOGO_SIZE[1]//2), logo)
     
     # If this is a unique tournament, create a new folder for that tournament
     if (not (os.path.exists(tournament[num]))):
