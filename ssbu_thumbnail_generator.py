@@ -11,6 +11,7 @@ BACKGROUND_PATH = config['vods']
 LOGO_PATH = config['logo_path']
 COLOR_RECTANGLE = config['rect_color']
 COLOR_TRIANGLE = config['tri_color']
+RENDER_SOURCE = config['render']
 font = ImageFont.truetype(config['font'], config['font_size'])
 
 # Read config json
@@ -20,6 +21,7 @@ BACKGROUND_PATH = config["vods"]
 LOGO_PATH = config['logo_path']
 COLOR_RECTANGLE = config['rect_color']
 COLOR_TRIANGLE = config['tri_color']
+RENDER_SOURCE = config['render']
 font = ImageFont.truetype(config['font'], config['font_size'])
 
 # Import a CSV with
@@ -60,8 +62,8 @@ for num in range(len(tournament)):
     logo = Image.open(LOGO_PATH).resize((200, 200))
     
     # Read character murals
-    character_1 = Image.open(r"P1_Murals/{}.png".format(format_character(player_1_character[num].split(',')[0])))
-    character_2 = Image.open(r"P2_Murals/{}.png".format(format_character(player_2_character[num].split(',')[0])))
+    character_1 = Image.open(RENDER_SOURCE + r"/P1_Murals/{}.png".format(format_character(player_1_character[num].split(',')[0])))
+    character_2 = Image.open(RENDER_SOURCE + r"/P2_Murals/{}.png".format(format_character(player_2_character[num].split(',')[0])))
     
     # Overlay character
     background.paste(character_1, (0, 0), character_1)
