@@ -1,0 +1,1 @@
+# Smash-Thumbnail-Generator
