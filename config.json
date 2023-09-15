@@ -2,6 +2,7 @@
         "vods":"vods.csv",
         "background_path":"NUT Background.png",
         "logo_path":"NuUltRed.png",
+        "logo_size":[200, 200],
         "rect_color":"#000000",
         "tri_color":"#ff0000",
         "render":"mural",
