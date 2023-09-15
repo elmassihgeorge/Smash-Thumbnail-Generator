@@ -13,8 +13,10 @@ with open("config.json") as load_config:
 VODS = config["vods"]
 BACKGROUND_PATH = config["background_path"]
 LOGO_PATH = config['logo_path']
+LOGO_SIZE = config['logo_size']
 COLOR_RECTANGLE = config['rect_color']
 COLOR_TRIANGLE = config['tri_color']
+RENDER_SOURCE = config['render']
 font = ImageFont.truetype(config['font'], config['font_size'])
 
 # Import a CSV with
@@ -52,11 +54,11 @@ with open(VODS, newline='') as csv_file:
 
 for num in range(len(tournament)):
     background = Image.open(BACKGROUND_PATH).resize((1280, 720))
-    logo = Image.open(LOGO_PATH).resize((200, 200))
+    logo = Image.open(LOGO_PATH).resize(LOGO_SIZE)
     
     # Read character murals
-    character_1 = Image.open(r"P1_Murals/{}.png".format(format_character(player_1_character[num].split(',')[0])))
-    character_2 = Image.open(r"P2_Murals/{}.png".format(format_character(player_2_character[num].split(',')[0])))
+    character_1 = Image.open(RENDER_SOURCE + r"/P1_Murals/{}.png".format(format_character(player_1_character[num].split(',')[0])))
+    character_2 = Image.open(RENDER_SOURCE + r"/P2_Murals/{}.png".format(format_character(player_2_character[num].split(',')[0])))
     
     # Overlay character
     background.paste(character_1, (0, 0), character_1)
@@ -88,17 +90,11 @@ for num in range(len(tournament)):
     text_layer = Image.new('L', (1280, 720))
     draw = ImageDraw.Draw(text_layer)
     
-    p1_width = font.getsize(player_1_name[num].upper())[0]
-    draw.text(((320 - (p1_width / 2)), -13), player_1_name[num].upper(), font=font, fill=255)
-
-    p2_width = font.getsize(player_2_name[num].upper())[0]
-    draw.text(((960 - (p2_width / 2)), 13), player_2_name[num].upper(), font=font, fill=255)
-    
-    bracket_round_width = font.getsize(bracket_round[num].upper())[0]
-    draw.text(((320 - (bracket_round_width / 2)), 600), bracket_round[num].upper(), font=font, fill=255)
-    
-    event_width = font.getsize(event[num].upper())[0]
-    draw.text(((960 - (event_width / 2)), 630), event[num].upper(), font=font, fill=255)
+    # Each point is calculated to be in the center of its box after the rotation
+    draw.text((333, 39), player_1_name[num].upper(), font=font, fill=255, anchor='mm')
+    draw.text((973, 66), player_2_name[num].upper(), font=font, fill=255, anchor='mm')
+    draw.text((307, 652), bracket_round[num].upper(), font=font, fill=255, anchor='mm')
+    draw.text((947, 679), event[num].upper(), font=font, fill=255, anchor='mm')
     
     # Rotate text
     rotated_text_layer = text_layer.rotate(2.41573322)
@@ -111,12 +107,18 @@ for num in range(len(tournament)):
     # background = background.filter(ImageFilter.SMOOTH)
     
     # Add Logo
-    background.paste(logo, (540, 260), logo)
+    background.paste(logo, (640 - LOGO_SIZE[0]//2, 360 - LOGO_SIZE[1]//2), logo)
     
     # If this is a unique tournament, create a new folder for that tournament
     if (not (os.path.exists(tournament[num]))):
         os.makedirs(tournament[num])
     
+    #Remove characters that can't be used for filenames from player names
+    illlegal_characters = ['|', '#', '<', '>', '$', '+', '%', '&', '{', '}', '\\', '*', '?', '/', '!', '\'', '"', ':', '@', '`', '=']
+    for i in illlegal_characters:
+        player_1_name[num] = player_1_name[num].replace(i, '')
+        player_2_name[num] = player_2_name[num].replace(i, '')
+
     #Save Thumbnail with formatted name
     background.save("{}/{} - {} ({}) vs {} ({}) [{}].png".format(tournament[num], tournament[num], player_1_name[num],
                                                               player_1_character[num], player_2_name[num],
