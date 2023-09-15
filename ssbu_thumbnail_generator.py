@@ -4,22 +4,16 @@ import csv
 import json
 from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageOps
 
-# Read config json
-with open("config.json") as load_config:
-    config = json.load(load_config)
-BACKGROUND_PATH = config['vods']
-LOGO_PATH = config['logo_path']
-LOGO_SIZE = config['logo_size']
-COLOR_RECTANGLE = config['rect_color']
-COLOR_TRIANGLE = config['tri_color']
-RENDER_SOURCE = config['render']
-font = ImageFont.truetype(config['font'], config['font_size'])
+def format_character(str):
+    return str.replace('.', '').replace('-','').replace('&', "and").lower()
 
 # Read config json
 with open("config.json") as load_config:
     config = json.load(load_config)
-BACKGROUND_PATH = config["vods"]
+VODS = config["vods"]
+BACKGROUND_PATH = config["background_path"]
 LOGO_PATH = config['logo_path']
+LOGO_SIZE = config['logo_size']
 COLOR_RECTANGLE = config['rect_color']
 COLOR_TRIANGLE = config['tri_color']
 RENDER_SOURCE = config['render']
@@ -33,7 +27,7 @@ font = ImageFont.truetype(config['font'], config['font_size'])
     # Note: Insert first character in graphic, rest in title
 # Event Round (Ex. Winner's Final)
 # Event (Ex. Ultimate Singles)
-with open('vods.csv', newline='') as csv_file:
+with open(VODS, newline='') as csv_file:
     csv_reader = csv.reader(csv_file)
     next(csv_reader) #Skip first line
     data = list(csv_reader)
