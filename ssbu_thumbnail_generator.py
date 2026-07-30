@@ -98,7 +98,7 @@ for num in range(len(tournament)):
     draw.text((947, 679), event[num].upper(), font=font, fill=255, anchor='mm')
     
     # Rotate text
-    rotated_text_layer = text_layer.rotate(2.41573322)
+    rotated_text_layer = text_layer.rotate(2.41573322, Image.BILINEAR)
     
     # Apply text to background
     # TODO: Support text colors other than black
