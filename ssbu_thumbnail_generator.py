@@ -17,6 +17,7 @@ LOGO_SIZE = config['logo_size']
 COLOR_RECTANGLE = config['rect_color']
 COLOR_TRIANGLE = config['tri_color']
 RENDER_SOURCE = config['render']
+ENCODING = None if config['encoding'] == "None" else config['encoding']
 font = ImageFont.truetype(config['font'], config['font_size'])
 
 # Import a CSV with
@@ -27,7 +28,7 @@ font = ImageFont.truetype(config['font'], config['font_size'])
     # Note: Insert first character in graphic, rest in title
 # Event Round (Ex. Winner's Final)
 # Event (Ex. Ultimate Singles)
-with open(VODS, newline='') as csv_file:
+with open(VODS, newline='', encoding=ENCODING) as csv_file:
     csv_reader = csv.reader(csv_file)
     next(csv_reader) #Skip first line
     data = list(csv_reader)
