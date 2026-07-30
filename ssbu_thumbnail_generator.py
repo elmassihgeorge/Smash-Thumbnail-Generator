@@ -76,10 +76,11 @@ for num in range(len(tournament)):
     rectangle_lr = [(640, 640), (640, 720), (1280, 693), (1280, 613)]
     
     # Draw shapes
-    ImageDraw.Draw(background).polygon(triangle_ul, fill=COLOR_TRIANGLE, outline=COLOR_TRIANGLE)
-    ImageDraw.Draw(background).polygon(triangle_ur, fill=COLOR_TRIANGLE, outline=COLOR_TRIANGLE)
-    ImageDraw.Draw(background).polygon(triangle_ll, fill=COLOR_TRIANGLE, outline=COLOR_TRIANGLE)
-    ImageDraw.Draw(background).polygon(triangle_lr, fill=COLOR_TRIANGLE, outline=COLOR_TRIANGLE)
+    if(COLOR_TRIANGLE):
+        ImageDraw.Draw(background).polygon(triangle_ul, fill=COLOR_TRIANGLE, outline=COLOR_TRIANGLE)
+        ImageDraw.Draw(background).polygon(triangle_ur, fill=COLOR_TRIANGLE, outline=COLOR_TRIANGLE)
+        ImageDraw.Draw(background).polygon(triangle_ll, fill=COLOR_TRIANGLE, outline=COLOR_TRIANGLE)
+        ImageDraw.Draw(background).polygon(triangle_lr, fill=COLOR_TRIANGLE, outline=COLOR_TRIANGLE)
     
     ImageDraw.Draw(background).polygon(rectangle_ul, fill=COLOR_RECTANGLE, outline=COLOR_RECTANGLE)
     ImageDraw.Draw(background).polygon(rectangle_ur, fill=COLOR_RECTANGLE, outline=COLOR_RECTANGLE)
