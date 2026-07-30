@@ -41,7 +41,6 @@ with open(VODS, newline='') as csv_file:
     player_1_character = []
     player_2_character = []
     
-    print(data)
     # Load data from CSV
     for line in data:
         tournament.append(line[0])
