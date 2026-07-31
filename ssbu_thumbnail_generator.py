@@ -157,7 +157,5 @@ for num in range(len(tournament)):
         player_2_character[num] = player_2_character[num].replace(i, '')
 
     #Save Thumbnail with formatted name
-    background.save("{}/{} - {} ({}) vs {} ({}) [{}].png".format(tournament[num], tournament[num], player_1_name[num],
-                                                              player_1_character[num], player_2_name[num],
-                                                              player_2_character[num], bracket_round[num]))
+    background.save(f"{tournament[num]}/{tournament[num]} - {player_1_name[num]} ({player_1_character[num]}) vs {player_2_name[num]} ({player_2_character[num]}) [{bracket_round[num]}]"[:200] + ".png")
     # background.show()
