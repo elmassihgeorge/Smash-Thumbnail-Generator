@@ -3,6 +3,7 @@ import os
 import csv
 import json
 from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageOps
+import sys
 
 def format_character(str):
     return str.replace('.', '').replace('-','').replace('&', "and").lower()
@@ -57,8 +58,40 @@ for num in range(len(tournament)):
     logo = Image.open(LOGO_PATH).resize(LOGO_SIZE)
     
     # Read character murals
-    character_1 = Image.open(RENDER_SOURCE + r"/P1_Murals/{}.png".format(format_character(player_1_character[num].split(',')[0])))
-    character_2 = Image.open(RENDER_SOURCE + r"/P2_Murals/{}.png".format(format_character(player_2_character[num].split(',')[0])))
+    character_1 = None
+    while character_1 == None:
+        try:
+            character_1 = Image.open(RENDER_SOURCE + fr"/P1_Murals/{format_character(player_1_character[num].split(',')[0])}.png")
+        except FileNotFoundError:
+            response = ""
+            while response not in ("r","s","q"):
+                response = input(f"P1 character not found: {format_character(player_1_character[num].split(',')[0])}\n[r]etry/[s]kip/[q]uit? ")
+            match response:
+                case "r":
+                    continue
+                case "s":
+                    break
+                case "q":
+                    sys.exit()
+    if character_1 == None:
+        continue
+    character_2 = None
+    while character_2 == None:
+        try:
+            character_2 = Image.open(RENDER_SOURCE + fr"/P2_Murals/{format_character(player_2_character[num].split(',')[0])}.png")
+        except FileNotFoundError:
+            response = ""
+            while response not in ("r","s","q"):
+                response = input(f"P2 character not found: {format_character(player_2_character[num].split(',')[0])}\n[r]etry/[s]kip/[q]uit? ")
+            match response:
+                case "r":
+                    continue
+                case "s":
+                    break
+                case "q":
+                    sys.exit()
+    if character_2 == None:
+        continue
     
     # Overlay character
     background.paste(character_1, (0, 0), character_1)
