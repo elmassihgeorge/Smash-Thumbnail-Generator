@@ -146,11 +146,15 @@ for num in range(len(tournament)):
     if (not (os.path.exists(tournament[num]))):
         os.makedirs(tournament[num])
     
-    #Remove characters that can't be used for filenames from player names
-    illlegal_characters = ['|', '#', '<', '>', '$', '+', '%', '&', '{', '}', '\\', '*', '?', '/', '!', '\'', '"', ':', '@', '`', '=']
+    #Remove characters that can't be used for filenames before saving file
+    illlegal_characters = ['|', '<', '>', '\\', '*', '?', '/', '"', ':']
     for i in illlegal_characters:
         player_1_name[num] = player_1_name[num].replace(i, '')
         player_2_name[num] = player_2_name[num].replace(i, '')
+        bracket_round[num] = bracket_round[num].replace(i, '')
+        tournament[num] = tournament[num].replace(i, '')
+        player_1_character[num] = player_1_character[num].replace(i, '')
+        player_2_character[num] = player_2_character[num].replace(i, '')
 
     #Save Thumbnail with formatted name
     background.save("{}/{} - {} ({}) vs {} ({}) [{}].png".format(tournament[num], tournament[num], player_1_name[num],
